@@ -29,3 +29,5 @@ Mélangez bien le jus de citron et le sucre glace avec un fouet électrique. Si 
 A l’aide d’un cure-dent, percez une dizaine de petits trous dans le cake puis versez votre glaçage.
 
 Laissez refroidir le tout puis servez!
+
+source : http://www.desfruitsetdeslegumes.com/cake-citron-plus-facile-vegan/
