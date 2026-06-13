@@ -54,9 +54,10 @@ steps:
 ---
 
 La vraie recette bolognaise d'Edda Onorato (*Un Déjeuner de soleil*), avec ses pâtes
-vertes maison aux épinards. Je les fais souvent, mais c'est la première fois que je
-me lance dans la pâte fraîche : prévoyez du temps et préparez le ragù la veille
-(voire l'avant-veille), il n'en sera que meilleur.
+vertes maison aux épinards. Je les fais souvent, mais en pratique je prends toujours
+la pâte dans le commerce : il faudra qu'un jour je tente la pâte fraîche maison.
+Prévoyez du temps et préparez le ragù la veille (voire l'avant-veille), il n'en sera
+que meilleur.
 
 ## Conseils
 
