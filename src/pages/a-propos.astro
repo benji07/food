@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="À propos"
+  description="Pourquoi ce carnet : du bookmarking de recettes, rien de plus. Chaque recette renvoie à sa source d'origine."
+>
+  <article class="article">
+    <header class="article__header">
+      <span class="eyebrow">À propos</span>
+      <h1>Un carnet de marque-pages culinaires</h1>
+    </header>
+
+    <div class="prose">
+      <p>
+        <strong>Recettes glanées</strong> rassemble les recettes que je cuisine
+        régulièrement. Je les avais éparpillées dans des marque-pages, des captures
+        d'écran et des onglets jamais refermés — et certaines ont disparu avec les
+        sites qui les hébergeaient. Ce carnet est là pour les garder sous la main.
+      </p>
+
+      <h2>Ce que c'est (et ce que ce n'est pas)</h2>
+      <p>
+        C'est uniquement du <strong>bookmarking</strong> : une collection de liens vers
+        des recettes que j'aime faire. <strong>Aucune de ces recettes n'est de moi</strong>,
+        et il ne s'agit pas non plus de m'approprier le travail des autres en le recopiant.
+        Chaque recette indique clairement son auteur ou son site d'origine et
+        <strong> renvoie vers la source</strong>, qu'il faut aller consulter (et soutenir).
+      </p>
+      <p>
+        Si une quantité ou une étape est reprise ici, c'est par commodité — pour pouvoir
+        cuisiner sans dépendre d'un site qui peut fermer du jour au lendemain, comme c'est
+        déjà arrivé. L'intention n'est jamais de remplacer l'original&nbsp;: au contraire,
+        l'idée est d'y ramener.
+      </p>
+
+      <h2>Les rubriques</h2>
+      <ul>
+        <li><strong>Sucré</strong> — gâteaux, biscuits, desserts et douceurs.</li>
+        <li><strong>Salé</strong> — plats, entrées et accompagnements du quotidien.</li>
+      </ul>
+
+      <h2>Si vous êtes l'auteur d'une recette</h2>
+      <p>
+        Si vous reconnaissez votre recette et souhaitez une correction d'attribution,
+        un lien différent ou son retrait, le bouton « proposer une modification » en bas
+        de chaque page mène directement au dépôt&nbsp;: j'y donne suite avec plaisir.
+      </p>
+
+      <h2>Comment c'est fait</h2>
+      <p>
+        Le site est statique, généré avec Astro et publié sur GitHub Pages. De nouvelles
+        recettes s'ajoutent au fil de mes essais en cuisine.
+      </p>
+    </div>
+  </article>
+</BaseLayout>

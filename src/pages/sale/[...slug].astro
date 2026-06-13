@@ -1,0 +1,47 @@
+---
+import { render } from 'astro:content';
+import RecipeLayout from '../../layouts/RecipeLayout.astro';
+import { categoryByCollection } from '../../utils/categories';
+import { getPublished } from '../../utils/content';
+import { githubEditUrl, withBase } from '../../utils/links';
+
+export async function getStaticPaths() {
+  const entries = await getPublished('sale');
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const cat = categoryByCollection('sale')!;
+const d = entry.data;
+---
+
+<RecipeLayout
+  title={d.title}
+  description={d.description}
+  date={d.date}
+  eyebrow={cat.singular}
+  backHref={withBase(`${cat.slug}/`)}
+  backLabel={cat.label}
+  cover={d.cover}
+  coverAlt={d.coverAlt}
+  coverCredit={d.coverCredit}
+  coverSource={d.coverSource}
+  tags={d.tags}
+  source={d.source}
+  sourceNote={d.sourceNote}
+  servings={d.servings}
+  servingsLabel={d.servingsLabel}
+  prepTime={d.prepTime}
+  cookTime={d.cookTime}
+  restTime={d.restTime}
+  difficulty={d.difficulty}
+  ingredients={d.ingredients}
+  steps={d.steps}
+  editUrl={githubEditUrl('sale', entry.id)}
+>
+  <Content />
+</RecipeLayout>

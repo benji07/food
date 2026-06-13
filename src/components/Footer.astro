@@ -1,0 +1,19 @@
+---
+import { withBase } from '../utils/links';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <p class="site-footer__note">
+      <strong>Des marque-pages, pas des recettes maison.</strong> Ce carnet rassemble
+      des recettes que je cuisine régulièrement, glanées ici et là. Aucune n'est de moi :
+      chacune crédite et renvoie à sa source d'origine. Rien n'est copié pour me
+      l'approprier — ce sont des marque-pages pour retrouver les recettes originales.
+    </p>
+    <div class="site-footer__meta">
+      <span>© {year} Recettes glanées</span>
+      <a href={withBase('rss.xml')}>Flux RSS</a>
+    </div>
+  </div>
+</footer>

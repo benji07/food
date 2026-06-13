@@ -1,0 +1,28 @@
+---
+import { withBase } from '../utils/links';
+import { categories } from '../utils/categories';
+
+const { pathname } = Astro.url;
+const isActive = (slug: string) => pathname.includes(`/${slug}`);
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="site-title" href={withBase('')}>Recettes<span>·</span>glanées</a>
+    <nav class="site-nav" aria-label="Navigation principale">
+      {
+        categories.map((c) => (
+          <a
+            href={withBase(`${c.slug}/`)}
+            aria-current={isActive(c.slug) ? 'page' : undefined}
+          >
+            {c.label}
+          </a>
+        ))
+      }
+      <a href={withBase('a-propos/')} aria-current={isActive('a-propos') ? 'page' : undefined}>
+        À propos
+      </a>
+    </nav>
+  </div>
+</header>

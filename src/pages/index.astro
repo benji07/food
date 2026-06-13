@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import RecipeCard from '../components/RecipeCard.astro';
+import { categories } from '../utils/categories';
+import { getPublished } from '../utils/content';
+import { withBase } from '../utils/links';
+
+// Pour chaque catégorie, on récupère les recettes publiées les plus récentes.
+const sections = await Promise.all(
+  categories.map(async (cat) => ({
+    cat,
+    entries: (await getPublished(cat.collection)).slice(0, 3),
+  }))
+);
+---
+
+<BaseLayout title="Recettes glanées">
+  <section class="hero">
+    <h1>Les recettes que je cuisine, glanées ici et là</h1>
+    <p>
+      Un carnet de marque-pages, rien de plus. Ce sont des recettes que je refais
+      régulièrement — aucune n'est de moi. Je les garde ici pour les retrouver
+      facilement, et <strong>chacune renvoie à sa source d'origine</strong>, à aller
+      voir absolument.
+    </p>
+  </section>
+
+  {
+    sections.map(({ cat, entries }) => (
+      <section class="section">
+        <div class="section__head">
+          <h2>{cat.label}</h2>
+          <a href={withBase(`${cat.slug}/`)}>Tout voir →</a>
+        </div>
+        {entries.length === 0 ? (
+          <p class="empty">Bientôt des recettes dans cette rubrique.</p>
+        ) : (
+          <div class="card-grid">
+            {entries.map((entry) => (
+              <RecipeCard
+                href={withBase(`${cat.slug}/${entry.id}/`)}
+                title={entry.data.title}
+                description={entry.data.description}
+                date={entry.data.date}
+                source={entry.data.source.name}
+                cover={entry.data.cover}
+                coverAlt={entry.data.coverAlt}
+              />
+            ))}
+          </div>
+        )}
+      </section>
+    ))
+  }
+</BaseLayout>

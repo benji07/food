@@ -1,0 +1,768 @@
+:root {
+  /* Palette éditoriale claire */
+  --color-bg: #fbfaf8;
+  --color-surface: #ffffff;
+  --color-text: #1c1b1a;
+  --color-muted: #6b6862;
+  --color-border: #e7e3dc;
+  --color-accent: #8a5a3b; /* terre / sépia, chaleureux comme une cuisine */
+  --color-accent-soft: #f1e9e1;
+
+  /* Typographie */
+  --font-serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  /* Mesures */
+  --measure: 68ch;
+  --space: 1rem;
+  --radius: 4px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-serif);
+  line-height: 1.2;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* Layout */
+.container {
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+main {
+  flex: 1 0 auto;
+  padding-block: 2.5rem 4rem;
+}
+
+/* En-tête */
+.site-header {
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.site-header__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  padding-block: 1.1rem;
+}
+
+.site-title {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+}
+
+.site-title:hover {
+  text-decoration: none;
+}
+
+.site-title span {
+  color: var(--color-accent);
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  font-size: 0.95rem;
+}
+
+.site-nav a {
+  color: var(--color-muted);
+}
+
+.site-nav a:hover,
+.site-nav a[aria-current='page'] {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+/* Pied de page */
+.site-footer {
+  flex-shrink: 0;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.site-footer__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding-block: 1.75rem;
+}
+
+/* Disclaimer permanent : ce blog n'est que du bookmarking. */
+.site-footer__note {
+  margin: 0;
+  max-width: var(--measure);
+  line-height: 1.55;
+}
+
+.site-footer__note strong {
+  color: var(--color-text);
+}
+
+.site-footer__meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
+/* Bandeau / hero */
+.hero {
+  max-width: var(--measure);
+  margin-block-end: 3rem;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin: 0 0 0.6rem;
+}
+
+.hero p {
+  font-size: 1.15rem;
+  color: var(--color-muted);
+  margin: 0;
+}
+
+/* Étiquette de catégorie */
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin: 0 0 0.5rem;
+}
+
+/* Sections de la home */
+.section {
+  margin-block-end: 3.5rem;
+}
+
+.section__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid var(--color-border);
+  padding-block-end: 0.6rem;
+  margin-block-end: 1.5rem;
+}
+
+.section__head h2 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.section__head a {
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+/* Grille de cartes */
+.card-grid {
+  display: grid;
+  gap: 1.75rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.card:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+.card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.card__media {
+  aspect-ratio: 3 / 2;
+  background: var(--color-accent-soft);
+  overflow: hidden;
+}
+
+.card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Repli coloré (dégradé déterministe) quand la recette n'a pas de cover. */
+.card__placeholder {
+  width: 100%;
+  height: 100%;
+}
+
+.card__body {
+  padding: 1rem 1.1rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.card__title {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.card__desc {
+  color: var(--color-muted);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.card__meta {
+  margin-top: auto;
+  padding-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+
+/* Article / recette */
+.article,
+.recipe {
+  max-width: var(--measure);
+  margin-inline: auto;
+}
+
+.article__header {
+  margin-block-end: 2rem;
+}
+
+.article__header h1 {
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  margin: 0.3rem 0 0.6rem;
+}
+
+.article__meta {
+  color: var(--color-muted);
+  font-size: 0.92rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+}
+
+.recipe__lead {
+  font-size: 1.15rem;
+  color: var(--color-muted);
+  margin: 0 0 0.9rem;
+}
+
+.article__cover {
+  margin: 1.75rem 0;
+}
+
+/* Le cadre porte la bordure : la légende reste hors du cadre, sous l'image. */
+.article__cover-frame {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  width: fit-content; /* le cadre épouse l'image (utile en portrait) */
+  max-width: 100%;
+  margin-inline: auto; /* centre les covers étroites */
+}
+
+/* Paysage/carré : pleine largeur du contenu. Portrait : hauteur plafonnée pour
+   ne pas envahir l'écran (largeur réduite proportionnellement). */
+.article__cover-frame img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 80vh;
+}
+
+/* Crédit affiché en petit sous une image (couverture ou illustration). */
+.figure__credit {
+  margin-top: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+.figure__credit a {
+  color: var(--color-muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.figure__credit a:hover {
+  color: var(--color-accent);
+}
+
+/* Corps de texte rendu depuis le markdown */
+.prose {
+  font-size: 1.0625rem;
+}
+
+.prose > * + * {
+  margin-block-start: 1.2em;
+}
+
+.prose h2 {
+  font-size: 1.5rem;
+  margin-block-start: 2em;
+}
+
+.prose h3 {
+  font-size: 1.2rem;
+  margin-block-start: 1.6em;
+}
+
+.prose img {
+  border-radius: var(--radius);
+  margin-inline: auto;
+}
+
+/* Illustration légendée du corps : voir src/utils/rehype-figure.mjs. */
+.prose figure {
+  margin: 1.75rem 0;
+}
+
+.prose figure a {
+  display: block;
+}
+
+.prose figure .figure__credit {
+  margin-top: 0.5rem;
+}
+
+.prose blockquote {
+  margin: 1.5em 0;
+  padding-inline-start: 1.1rem;
+  border-inline-start: 3px solid var(--color-accent);
+  color: var(--color-muted);
+  font-style: italic;
+}
+
+.prose code {
+  background: var(--color-accent-soft);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+.prose pre {
+  background: #1c1b1a;
+  color: #f3f0ea;
+  padding: 1rem 1.1rem;
+  border-radius: var(--radius);
+  overflow-x: auto;
+}
+
+.prose pre code {
+  background: none;
+  padding: 0;
+}
+
+/* Liste de tags */
+.tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 2.5rem 0 0;
+}
+
+.tags li {
+  font-size: 0.8rem;
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+}
+
+/* Bouton « Signaler une erreur » en bas d'article */
+.article__report {
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.report-link {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+.report-link:hover {
+  color: var(--color-accent);
+}
+
+/* État vide */
+.empty {
+  color: var(--color-muted);
+  font-style: italic;
+  padding: 2rem 0;
+}
+
+/* Lien retour */
+.back-link {
+  display: inline-block;
+  margin-block-end: 1.5rem;
+  font-size: 0.9rem;
+}
+
+/* ------------------------------------------------------------------ *
+ * Spécifique recettes                                                 *
+ * ------------------------------------------------------------------ */
+
+/* Bandeau d'attribution en tête de recette : tout vient d'une source. */
+.source-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.6rem;
+  margin: 0 0 2rem;
+  padding: 0.8rem 1rem;
+  background: var(--color-accent-soft);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+}
+
+.source-banner__tag {
+  font-weight: 700;
+  color: var(--color-accent);
+  white-space: nowrap;
+}
+
+.source-banner__note {
+  flex-basis: 100%;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--color-muted);
+}
+
+/* Durées (préparation / cuisson / repos) */
+.recipe__times {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 2rem 0;
+  padding: 0;
+}
+
+.recipe__time {
+  flex: 1 1 8rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.7rem 0.9rem;
+}
+
+.recipe__time dt {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.recipe__time dd {
+  margin: 0.15rem 0 0;
+  font-size: 1.1rem;
+  font-family: var(--font-serif);
+}
+
+/* Disposition ingrédients + étapes : deux colonnes sur grand écran. */
+.recipe__body {
+  display: grid;
+  gap: 2.5rem;
+  margin-top: 2.5rem;
+}
+
+@media (min-width: 48rem) {
+  .recipe__body {
+    grid-template-columns: minmax(15rem, 22rem) 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+}
+
+.ingredients h2,
+.steps h2 {
+  font-size: 1.5rem;
+  margin: 0 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Colonne ingrédients « collante » sur grand écran. */
+@media (min-width: 48rem) {
+  .ingredients {
+    position: sticky;
+    top: 1.5rem;
+  }
+}
+
+.ingredients__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.ingredients__head h2 {
+  flex: 1;
+}
+
+/* Sélecteur de portions */
+.servings {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.servings__label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.servings__control {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+.servings__btn {
+  border: none;
+  background: none;
+  color: var(--color-accent);
+  font-size: 1.1rem;
+  line-height: 1;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+}
+
+.servings__btn:hover {
+  background: var(--color-accent-soft);
+}
+
+.servings__value {
+  min-width: 2rem;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.ingredient-group + .ingredient-group {
+  margin-top: 1.25rem;
+}
+
+.ingredient-group__title {
+  font-size: 1rem;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  color: var(--color-accent);
+  margin: 0 0 0.5rem;
+}
+
+.ingredient-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ingredient {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.ingredient__label {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0.5rem 0;
+  cursor: pointer;
+}
+
+.ingredient__check {
+  flex-shrink: 0;
+  accent-color: var(--color-accent);
+  transform: translateY(1px);
+}
+
+.ingredient__check:checked + .ingredient__text {
+  color: var(--color-muted);
+  text-decoration: line-through;
+  text-decoration-color: var(--color-border);
+}
+
+.ingredient__qty {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.ingredient__unit {
+  margin-left: 0.2rem;
+  color: var(--color-muted);
+}
+
+.ingredient__name {
+  margin-left: 0.35rem;
+}
+
+.ingredient__note {
+  color: var(--color-muted);
+  font-style: italic;
+}
+
+/* Étapes numérotées */
+.step-list {
+  list-style: none;
+  counter-reset: step;
+  margin: 0;
+  padding: 0;
+}
+
+.step {
+  counter-increment: step;
+  position: relative;
+  padding-left: 3rem;
+  min-height: 2rem;
+}
+
+.step + .step {
+  margin-top: 1.5rem;
+}
+
+.step::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  border-radius: 999px;
+  font-family: var(--font-serif);
+  font-weight: 700;
+}
+
+.step p {
+  margin: 0;
+  padding-top: 0.2rem;
+}
+
+/* Bloc source en pied de recette */
+.source-box {
+  margin-top: 3rem;
+  padding: 1.25rem 1.4rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-accent);
+  border-radius: var(--radius);
+}
+
+.source-box p {
+  margin: 0 0 0.5rem;
+}
+
+.source-box__head {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.source-box a {
+  word-break: break-word;
+}
+
+.source-box__note {
+  font-style: italic;
+  color: var(--color-muted);
+}
+
+.source-box__disclaimer {
+  margin-bottom: 0;
+  font-size: 0.88rem;
+  color: var(--color-muted);
+}

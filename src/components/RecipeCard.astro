@@ -1,0 +1,45 @@
+---
+import { Image } from 'astro:assets';
+import { formatDate } from '../utils/date';
+import { placeholder } from '../utils/placeholder';
+
+interface Props {
+  href: string;
+  title: string;
+  description: string;
+  date: Date;
+  source?: string; // nom de la source (mis en avant : c'est du bookmarking)
+  cover?: ImageMetadata | string; // ImageMetadata (local) ou URL externe (string)
+  coverAlt?: string;
+  meta?: string; // info optionnelle (ex : difficulté)
+}
+
+const { href, title, description, date, source, cover, coverAlt, meta } = Astro.props;
+---
+
+<article class="card">
+  <a href={href}>
+    <div class="card__media">
+      {
+        cover ? (
+          typeof cover === 'string' ? (
+            <img src={cover} alt={coverAlt ?? title} width="520" height="347" loading="lazy" />
+          ) : (
+            <Image src={cover} alt={coverAlt ?? title} width={520} height={347} />
+          )
+        ) : (
+          <div class="card__placeholder" style={`background:${placeholder(title)}`} aria-hidden="true" />
+        )
+      }
+    </div>
+    <div class="card__body">
+      <h3 class="card__title">{title}</h3>
+      <p class="card__desc">{description}</p>
+      <p class="card__meta">
+        {meta ? `${meta} · ` : ''}
+        {source ? `D'après ${source} · ` : ''}
+        <time datetime={date.toISOString()}>{formatDate(date)}</time>
+      </p>
+    </div>
+  </a>
+</article>

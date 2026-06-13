@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RecipeCard from '../../components/RecipeCard.astro';
+import { getPublished } from '../../utils/content';
+import { categoryByCollection } from '../../utils/categories';
+import { withBase } from '../../utils/links';
+
+const cat = categoryByCollection('sale')!;
+const entries = await getPublished('sale');
+---
+
+<BaseLayout title={cat.label} description={cat.description}>
+  <section class="hero">
+    <span class="eyebrow">Rubrique</span>
+    <h1>{cat.label}</h1>
+    <p>{cat.description}</p>
+  </section>
+
+  {
+    entries.length === 0 ? (
+      <p class="empty">Bientôt des recettes salées ici.</p>
+    ) : (
+      <div class="card-grid">
+        {entries.map((entry) => (
+          <RecipeCard
+            href={withBase(`${cat.slug}/${entry.id}/`)}
+            title={entry.data.title}
+            description={entry.data.description}
+            date={entry.data.date}
+            source={entry.data.source.name}
+            cover={entry.data.cover}
+            coverAlt={entry.data.coverAlt}
+          />
+        ))}
+      </div>
+    )
+  }
+</BaseLayout>
