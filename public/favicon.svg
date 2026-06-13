@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="6" fill="#1c1b1a" />
+  <g stroke="#d99b6c" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- fourchette -->
+    <path d="M10 7 v4 a2 2 0 0 0 4 0 V7" />
+    <path d="M12 11 v14" />
+    <!-- cuillère -->
+    <ellipse cx="21" cy="10.5" rx="3" ry="4" />
+    <path d="M21 14.5 v10.5" />
+  </g>
+</svg>

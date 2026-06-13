@@ -1,0 +1,301 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from './BaseLayout.astro';
+import { formatDate } from '../utils/date';
+
+interface IngredientItem {
+  qty?: number;
+  unit?: string;
+  name: string;
+  note?: string;
+}
+interface IngredientGroup {
+  title?: string;
+  items: IngredientItem[];
+}
+
+interface Props {
+  title: string;
+  description: string;
+  date: Date;
+  eyebrow: string; // libellé de catégorie
+  backHref: string;
+  backLabel: string;
+  cover?: ImageMetadata | string;
+  coverAlt?: string;
+  coverCredit?: string;
+  coverSource?: string;
+  tags?: string[];
+  // Attribution obligatoire : le blog n'est que du bookmarking.
+  source: { url: string; name: string };
+  sourceNote?: string;
+  servings?: number;
+  servingsLabel?: string;
+  prepTime?: number;
+  cookTime?: number;
+  restTime?: number;
+  difficulty?: string;
+  ingredients: IngredientGroup[];
+  steps: string[];
+  editUrl: string; // lien « Signaler une erreur » vers l'éditeur GitHub
+}
+
+const {
+  title,
+  description,
+  date,
+  eyebrow,
+  backHref,
+  backLabel,
+  cover,
+  coverAlt,
+  coverCredit,
+  coverSource,
+  tags,
+  source,
+  sourceNote,
+  servings,
+  servingsLabel,
+  prepTime,
+  cookTime,
+  restTime,
+  difficulty,
+  ingredients,
+  steps,
+  editUrl,
+} = Astro.props;
+
+// Formate une quantité numérique : décimale en virgule, sans zéros superflus.
+function formatQty(n: number): string {
+  return (Math.round(n * 100) / 100).toString().replace('.', ',');
+}
+
+// Formate une durée en minutes : « 45 min » ou « 1 h 05 ».
+function formatTime(min?: number): string | null {
+  if (min == null) return null;
+  if (min < 60) return `${min} min`;
+  const h = Math.floor(min / 60);
+  const m = min % 60;
+  return m ? `${h} h ${String(m).padStart(2, '0')}` : `${h} h`;
+}
+
+const totalTime = [prepTime, cookTime, restTime]
+  .filter((t): t is number => typeof t === 'number')
+  .reduce((a, b) => a + b, 0);
+
+const difficultyLabel = difficulty
+  ? difficulty.charAt(0).toUpperCase() + difficulty.slice(1)
+  : null;
+
+const headerMeta = [
+  difficultyLabel,
+  totalTime > 0 ? `⏱ ${formatTime(totalTime)}` : null,
+  servingsLabel ? `🍽 ${servingsLabel}` : null,
+].filter(Boolean);
+
+const timeRows = [
+  { label: 'Préparation', value: formatTime(prepTime) },
+  { label: 'Cuisson', value: formatTime(cookTime) },
+  { label: 'Repos', value: formatTime(restTime) },
+].filter((r) => r.value);
+---
+
+<BaseLayout title={title} description={description}>
+  <article class="recipe">
+    <a class="back-link" href={backHref}>← {backLabel}</a>
+
+    <header class="article__header">
+      <span class="eyebrow">{eyebrow}</span>
+      <h1>{title}</h1>
+      <p class="recipe__lead">{description}</p>
+      <div class="article__meta">
+        <time datetime={date.toISOString()}>{formatDate(date)}</time>
+        {headerMeta.map((m) => <span>{m}</span>)}
+      </div>
+    </header>
+
+    {/* Bandeau d'attribution en tête : ce site n'est que du bookmarking. */}
+    <p class="source-banner">
+      <span class="source-banner__tag">🔖 Marque-page</span>
+      Recette de <strong>{source.name}</strong>.
+      <a href={source.url} target="_blank" rel="noopener noreferrer">Voir la recette originale ↗</a>
+      {sourceNote && <span class="source-banner__note">{sourceNote}</span>}
+    </p>
+
+    {
+      cover && (
+        <figure class="article__cover">
+          <div class="article__cover-frame">
+            {coverSource ? (
+              <a href={coverSource} target="_blank" rel="noopener noreferrer">
+                {typeof cover === 'string' ? (
+                  <img src={cover} alt={coverAlt ?? title} width="1280" height="720" loading="lazy" />
+                ) : (
+                  <Image src={cover} alt={coverAlt ?? title} width={1280} height={720} />
+                )}
+              </a>
+            ) : typeof cover === 'string' ? (
+              <img src={cover} alt={coverAlt ?? title} width="1280" height="720" loading="lazy" />
+            ) : (
+              <Image src={cover} alt={coverAlt ?? title} width={1280} height={720} />
+            )}
+          </div>
+          {coverCredit && (
+            <figcaption class="figure__credit">
+              {coverSource ? (
+                <a href={coverSource} target="_blank" rel="noopener noreferrer">
+                  {coverCredit}
+                </a>
+              ) : (
+                coverCredit
+              )}
+            </figcaption>
+          )}
+        </figure>
+      )
+    }
+
+    {/* Introduction / notes libres rédigées dans le corps markdown. */}
+    <div class="prose recipe__intro">
+      <slot />
+    </div>
+
+    {
+      timeRows.length > 0 && (
+        <dl class="recipe__times">
+          {timeRows.map((r) => (
+            <div class="recipe__time">
+              <dt>{r.label}</dt>
+              <dd>{r.value}</dd>
+            </div>
+          ))}
+        </dl>
+      )
+    }
+
+    <div class="recipe__body">
+      <section class="ingredients" aria-labelledby="ingredients-title">
+        <div class="ingredients__head">
+          <h2 id="ingredients-title">Ingrédients</h2>
+          {
+            servings && (
+              <div class="servings" data-base-servings={servings}>
+                <span class="servings__label">Portions</span>
+                <div class="servings__control">
+                  <button type="button" class="servings__btn" data-step="-1" aria-label="Diminuer les portions">−</button>
+                  <output class="servings__value">{servings}</output>
+                  <button type="button" class="servings__btn" data-step="1" aria-label="Augmenter les portions">+</button>
+                </div>
+              </div>
+            )
+          }
+        </div>
+
+        {
+          ingredients.map((group) => (
+            <div class="ingredient-group">
+              {group.title && <h3 class="ingredient-group__title">{group.title}</h3>}
+              <ul class="ingredient-list">
+                {group.items.map((it) => (
+                  <li class="ingredient">
+                    <label class="ingredient__label">
+                      <input type="checkbox" class="ingredient__check" />
+                      <span class="ingredient__text">
+                        {it.qty != null && (
+                          <span class="ingredient__qty" data-base-qty={it.qty}>
+                            {formatQty(it.qty)}
+                          </span>
+                        )}
+                        {it.unit && <span class="ingredient__unit">{it.unit}</span>}
+                        <span class="ingredient__name">{it.name}</span>
+                        {it.note && <span class="ingredient__note"> — {it.note}</span>}
+                      </span>
+                    </label>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </section>
+
+      <section class="steps" aria-labelledby="steps-title">
+        <h2 id="steps-title">Préparation</h2>
+        <ol class="step-list">
+          {steps.map((s) => (
+            <li class="step">
+              <p>{s}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+    </div>
+
+    {
+      tags && tags.length > 0 && (
+        <ul class="tags">
+          {tags.map((t) => (
+            <li>{t}</li>
+          ))}
+        </ul>
+      )
+    }
+
+    {/* Bloc source en pied, mis en avant : rappel que tout vient d'ailleurs. */}
+    <aside class="source-box">
+      <p class="source-box__head">Source de la recette</p>
+      <p>
+        Recette de <strong>{source.name}</strong> —{' '}
+        <a href={source.url} target="_blank" rel="noopener noreferrer">{source.url}</a>
+      </p>
+      {sourceNote && <p class="source-box__note">{sourceNote}</p>}
+      <p class="source-box__disclaimer">
+        Cette recette n'est pas de moi : ce carnet n'est qu'un marque-page pour la
+        retrouver. Merci d'aller voir (et de soutenir) la source d'origine.
+      </p>
+    </aside>
+
+    <footer class="article__report">
+      <a href={editUrl} target="_blank" rel="noopener noreferrer" class="report-link">
+        ✎ Une erreur ou une correction ? Proposer une modification sur GitHub
+      </a>
+    </footer>
+  </article>
+</BaseLayout>
+
+<script>
+  // Recalcul des quantités selon le nombre de portions (vanilla, sans framework).
+  // Les quantités non numériques (« une pincée », « le zeste d'un citron ») ne
+  // portent pas de data-base-qty et restent donc intactes.
+  const recipe = document.querySelector('.recipe');
+  const servingsEl = recipe?.querySelector<HTMLElement>('.servings');
+
+  if (recipe && servingsEl) {
+    const base = Number(servingsEl.dataset.baseServings);
+    const valueOut = recipe.querySelector('.servings__value');
+    const qtyEls = Array.from(
+      recipe.querySelectorAll<HTMLElement>('.ingredient__qty[data-base-qty]')
+    );
+    let current = base;
+
+    const fmt = (n: number) =>
+      (Math.round(n * 100) / 100).toString().replace('.', ',');
+
+    const render = () => {
+      if (valueOut) valueOut.textContent = String(current);
+      const factor = current / base;
+      for (const el of qtyEls) {
+        const q = Number(el.dataset.baseQty);
+        el.textContent = fmt(q * factor);
+      }
+    };
+
+    for (const btn of recipe.querySelectorAll<HTMLButtonElement>('.servings__btn')) {
+      btn.addEventListener('click', () => {
+        const step = Number(btn.dataset.step);
+        current = Math.max(1, current + step);
+        render();
+      });
+    }
+  }
+</script>
