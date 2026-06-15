@@ -1,4 +1,4 @@
-# Recettes glanées — guide pour l'agent
+# benji07's food — guide pour l'agent
 
 Ce dépôt est un blog culinaire statique (Astro) publié sur GitHub Pages. C'est un
 **carnet de marque-pages** : il rassemble les recettes que Benjamin cuisine

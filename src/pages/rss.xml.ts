@@ -24,7 +24,7 @@ export async function GET(context: APIContext) {
     .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
 
   return rss({
-    title: 'Recettes glanées',
+    title: "benji07's food",
     description:
       "Un carnet de marque-pages : les recettes que je cuisine régulièrement, chacune renvoyant à sa source d'origine.",
     site: context.site!,

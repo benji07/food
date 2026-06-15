@@ -1,4 +1,4 @@
-# Recettes glanées
+# benji07's food
 
 Un blog culinaire statique : **un carnet de marque-pages** pour les recettes que je
 cuisine régulièrement. Publié sur GitHub Pages :

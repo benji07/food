@@ -12,7 +12,7 @@ lire la page source).
 ## Prompt à copier
 
 ```text
-Tu ajoutes UNE recette au blog « Recettes glanées » (dépôt courant). Lis d'abord
+Tu ajoutes UNE recette au blog « benji07's food » (dépôt courant). Lis d'abord
 CLAUDE.md et docs/AUTHORING.md et respecte-les à la lettre. Rappel : ce site n'est
 que du bookmarking — tu ne dois RIEN inventer, et la recette doit créditer et
 renvoyer à sa source.
