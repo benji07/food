@@ -4,9 +4,9 @@ description: "Riz, saumon juste saisi façon tataki, concombre à la sauce soja,
 date: 2026-10-06
 tags: ["saumon", "riz", "bowl", "rapide", "plat"]
 source:
-  url: "https://www.youtube.com/watch?v=ZRoRsQa-02E&t=900s"
+  url: "https://www.youtube.com/watch?v=ZRoRsQa-02E&t=852s"
   name: "Whoogy's (YouTube)"
-sourceNote: "Troisième recette de la vidéo, à partir de 15 min."
+sourceNote: "Troisième recette de la vidéo, à partir de 14 min 12 s."
 ingredients:
   - items:
       - { name: "riz" }
