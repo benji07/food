@@ -9,6 +9,8 @@ source:
 sourceNote: "Troisième recette de la vidéo, à partir de 14 min 12 s."
 servings: 2
 servingsLabel: "2 personnes"
+cover: ../../assets/covers/bowl-riz-saumon.jpg
+coverAlt: "Bol de riz garni de tranches de saumon grillé au sésame, de petits pois, de cébette et d'un filet de mayo épicée"
 ingredients:
   - items:
       - { name: "riz" }
@@ -26,7 +28,7 @@ ingredients:
       - { qty: 2, unit: "c. à soupe", name: "sauce soja", note: "dont un peu pour assaisonner le concombre" }
 steps:
   - "Rincer le riz et le cuire, idéalement à l'autocuiseur : un volume de riz pour un volume d'eau, environ 12 minutes. Faire chauffer un petit volume d'eau salée dans une casserole pour les petits pois."
-  - "Couper le concombre en rondelles le plus finement possible (à la mandoline ou au couteau). L'assaisonner avec du sel fin et un peu de sauce soja (y aller doucement, le sel le fait déjà dégorger), bien mélanger pour enrober chaque rondelle et laisser reposer."
+  - "Couper le concombre en rondelles le plus finement possible (à la mandoline ou au couteau). L'assaisonner avec du sel fin et de la sauce soja, sans forcer sur l'un ni sur l'autre : les deux salent beaucoup (on peut aussi utiliser une sauce soja réduite en sel). Bien mélanger pour enrober chaque rondelle et laisser reposer."
   - "Préparer la sauce : mélanger la mayonnaise, la sauce piquante et un peu de sauce soja, qui rend la sauce plus fluide."
   - "Cuire les petits pois quelques minutes dans l'eau bouillante salée : ils doivent rester un peu croquants. Les égoutter aussitôt dans un récipient (ou dans de l'eau glacée pour stopper la cuisson)."
   - "Retirer la peau du saumon si on le souhaite, en glissant délicatement la lame du couteau sous la chair. Saler les deux faces."
