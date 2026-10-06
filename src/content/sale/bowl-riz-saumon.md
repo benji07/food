@@ -1,6 +1,6 @@
 ---
 title: "Bowl de riz au saumon"
-description: "Riz, saumon juste saisi façon tataki, concombre à la sauce soja, petits pois croquants et mayo relevée : un bol équilibré prêt en 20 minutes."
+description: "Riz, saumon mi-cuit, concombre à la sauce soja, petits pois croquants et mayo relevée : un bol équilibré prêt en 20 minutes."
 date: 2026-10-06
 tags: ["saumon", "riz", "bowl", "rapide", "plat"]
 source:
@@ -32,13 +32,13 @@ steps:
   - "Préparer la sauce : mélanger la mayonnaise, la sauce piquante et un peu de sauce soja, qui rend la sauce plus fluide."
   - "Cuire les petits pois quelques minutes dans l'eau bouillante salée : ils doivent rester un peu croquants. Les égoutter aussitôt dans un récipient (ou dans de l'eau glacée pour stopper la cuisson)."
   - "Retirer la peau du saumon si on le souhaite, en glissant délicatement la lame du couteau sous la chair. Saler les deux faces."
-  - "Préchauffer une poêle à feu moyen, ajouter un filet d'huile d'olive et y déposer le saumon côté peau. Le laisser saisir sans trop le bouger, en appuyant légèrement, pour former une belle croûte. Le retourner et ne le laisser qu'une petite minute de l'autre côté : il doit rester tendre et cru à cœur."
+  - "Préchauffer une poêle à feu moyen, ajouter un filet d'huile d'olive et y déposer le saumon côté peau. Le laisser saisir sans trop le bouger, en appuyant légèrement, pour former une belle croûte. Le retourner et ne le laisser qu'une petite minute de l'autre côté : il doit rester mi-cuit, tendre à cœur."
   - "Ciseler finement la ciboulette ou la cébette."
   - "Dresser : un monticule de riz, le saumon encore tiède émietté en morceaux, la salade de concombre, les petits pois encore tièdes, une bonne cuillère à soupe de ciboulette, la sauce et quelques graines de sésame."
 ---
 
-Le saumon est juste saisi d'un côté, façon tataki : croûte grillée à l'extérieur,
-chair tendre et fraîche à l'intérieur. On peut aussi le servir cru, en dés.
+Le saumon est mi-cuit : bien saisi côté peau pour une croûte grillée, puis une
+petite minute de l'autre côté pour garder une chair tendre à l'intérieur.
 
 ## Astuces
 
