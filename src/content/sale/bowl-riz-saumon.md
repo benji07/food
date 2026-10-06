@@ -7,6 +7,8 @@ source:
   url: "https://www.youtube.com/watch?v=ZRoRsQa-02E&t=852s"
   name: "Whoogy's (YouTube)"
 sourceNote: "Troisième recette de la vidéo, à partir de 14 min 12 s."
+servings: 2
+servingsLabel: "2 personnes"
 ingredients:
   - items:
       - { name: "riz" }
